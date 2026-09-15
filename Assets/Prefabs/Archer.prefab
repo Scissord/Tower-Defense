@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3708108940232919560}
   - component: {fileID: 5092474983015856590}
+  - component: {fileID: 6571015725097116057}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -92,3 +93,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &6571015725097116057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379176106182733808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc210dc5a50a934888afdc2a08d6e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tower
+  range: 3
+  fireRate: 1
+  projectilePrefab: {fileID: 7760553001708812447, guid: 3a261dedbf4ad7142a234ad7716e2823, type: 3}
+  firePoint: {fileID: 3708108940232919560}

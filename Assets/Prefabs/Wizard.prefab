@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2869353066347268322}
   - component: {fileID: 1390099991785797532}
+  - component: {fileID: -5368912831469388390}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -92,3 +93,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &-5368912831469388390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2494986295080075780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc210dc5a50a934888afdc2a08d6e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tower
+  range: 5
+  fireRate: 1.5
+  projectilePrefab: {fileID: 5696576153873047732, guid: 50560a0159f684547a732c874e47cc05, type: 3}
+  firePoint: {fileID: 2869353066347268322}
