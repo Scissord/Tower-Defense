@@ -2117,7 +2117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a977120b73d2cf2498b0a75d02549448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
-  coins: 10
+  coins: 200
   coinText: {fileID: 1159852018}
 --- !u!1 &953083902
 GameObject:
