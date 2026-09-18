@@ -121,6 +121,7 @@ MonoBehaviour:
     price: 20
   upgradeStage: 0
   towerUpgradeUIPrefab: {fileID: 6614449688266811404, guid: f18af4d6672cb554fa4087d8ecc8ba8c, type: 3}
+  cloudPS: {fileID: 863138503113029466, guid: 08afbf468914c8c4e843fec629ddc58c, type: 3}
   towerPrice: 5
 --- !u!61 &-5247433104737981463
 BoxCollider2D:

@@ -22,9 +22,12 @@ public class Tower : MonoBehaviour
     public GameObject towerUpgradeUIPrefab;
     private GameObject currentUI;
 
+    public GameObject cloudPS;
+
     public void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        Instantiate(cloudPS, transform.position, Quaternion.identity);
     }
 
     public int towerPrice = 1;
@@ -84,6 +87,7 @@ public class Tower : MonoBehaviour
         sr.sprite = currentUpgradeStage.sprite;
         CoinManager.instance.UpdateCoins(-currentUpgradeStage.price);
         upgradeStage += 1;
+        Instantiate(cloudPS, transform.position, Quaternion.identity);
     }
 
     private void OnMouseDown()
