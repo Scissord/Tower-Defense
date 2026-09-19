@@ -8,6 +8,11 @@ public class SpeedUpManager : MonoBehaviour
     public Color normalColor;
     public Color speedUpColor;
 
+    void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     public void ToggleSpeedUp()
     {
         speedUp = !speedUp;

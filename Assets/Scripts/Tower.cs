@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class TowerUpgradeStage
 {
+    public int damage;
     public float range;
+    [Min(0.1f)]
     public float fireRate;
     public Sprite sprite;
     public int price;
@@ -11,7 +14,9 @@ public class TowerUpgradeStage
 
 public class Tower : MonoBehaviour
 {
+    public int damage = 1;
     public float range = 3f;
+    [Min(0.1f)]
     public float fireRate = 1f;
     public GameObject projectilePrefab;
     public Transform firePoint;
@@ -49,16 +54,14 @@ public class Tower : MonoBehaviour
 
     Enemy FindBestTarget()
     {
-        Enemy[] enemies = GameObject.FindObjectsByType<Enemy>();
-
         Enemy best = null;
         float bestProgress = -1f;
 
-        foreach (Enemy e in enemies)
+        foreach (Enemy e in Enemy.Alive)
         {
-            float dist = Vector2.Distance(transform.position, e.transform.position);
+            float sqrDist = (e.transform.position - transform.position).sqrMagnitude;
 
-            if (dist <= range)
+            if (sqrDist <= range * range)
             {
                 if (e.currentWayPoint > bestProgress)
                 {
@@ -76,12 +79,14 @@ public class Tower : MonoBehaviour
         GameObject p = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile pr = p.GetComponent<Projectile>();
         pr.target = target.transform;
+        pr.damage = damage;
     }
 
     public void Upgrade()
     {
         TowerUpgradeStage currentUpgradeStage = upgradeStages[upgradeStage];
 
+        damage = currentUpgradeStage.damage;
         range = currentUpgradeStage.range;
         fireRate = currentUpgradeStage.fireRate;
         sr.sprite = currentUpgradeStage.sprite;
@@ -92,6 +97,8 @@ public class Tower : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (TowerSelectionUI.SelectedTowerPrefab != null) return;
         if (currentUI == null)
         {
             currentUI = Instantiate(towerUpgradeUIPrefab, FindAnyObjectByType<Canvas>().transform);

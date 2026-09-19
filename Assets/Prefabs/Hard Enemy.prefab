@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   speed: 3
-  health: 2
+  maxHealth: 3
+  damage: 10
+  reward: 5
   waypoints: []
   currentWayPoint: 0

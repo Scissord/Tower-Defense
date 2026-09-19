@@ -2448,21 +2448,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   waves:
-  - duration: 15
-    easyEnemies: 5
-    hardEnemies: 0
-  - duration: 15
-    easyEnemies: 8
-    hardEnemies: 0
-  - duration: 15
-    easyEnemies: 8
-    hardEnemies: 2
-  - duration: 15
-    easyEnemies: 2
-    hardEnemies: 8
+  - groups:
+    - enemyPrefab: {fileID: 91676816083302697, guid: 63b54375e27088747965581e11bd16af, type: 3}
+      count: 5
+      interval: 1
+      delayBefore: 1
+  - groups:
+    - enemyPrefab: {fileID: 91676816083302697, guid: 63b54375e27088747965581e11bd16af, type: 3}
+      count: 5
+      interval: 1
+      delayBefore: 1
+    - enemyPrefab: {fileID: 4682800374955297247, guid: ccabbe7ea7a126b4d9a6d14351ee2c94, type: 3}
+      count: 5
+      interval: 1
+      delayBefore: 3
+  - groups:
+    - enemyPrefab: {fileID: 91676816083302697, guid: 63b54375e27088747965581e11bd16af, type: 3}
+      count: 5
+      interval: 1
+      delayBefore: 0
+    - enemyPrefab: {fileID: 4682800374955297247, guid: ccabbe7ea7a126b4d9a6d14351ee2c94, type: 3}
+      count: 5
+      interval: 1
+      delayBefore: 0
   startWaveButton: {fileID: 426207254}
-  eastEnemyPrefab: {fileID: 91676816083302697, guid: 63b54375e27088747965581e11bd16af, type: 3}
-  hardEnemyPrefab: {fileID: 4682800374955297247, guid: ccabbe7ea7a126b4d9a6d14351ee2c94, type: 3}
   wayPoints:
   - {fileID: 1775644567}
   - {fileID: 1412872064}

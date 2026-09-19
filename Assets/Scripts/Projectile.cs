@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int damage = 1;
     public float speed = 8f;
     public Transform target;
     public GameObject hitPS;
@@ -25,12 +26,7 @@ public class Projectile : MonoBehaviour
         if (Vector2.Distance(transform.position, target.position) < 0.15f)
         {
             Enemy e = target.GetComponent<Enemy>();
-            e.health -= 1;
-            if (e.health <= 0)
-            {
-                CoinManager.instance.UpdateCoins(1);
-                Destroy(target.gameObject);
-            }
+            e.TakeDamage(damage);
 
             Instantiate(hitPS, transform.position, Quaternion.identity);
             AudioManager.instance.PlaySFX(hitSFX);

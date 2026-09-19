@@ -4,6 +4,11 @@ public class TowerSelectionUI : MonoBehaviour
 {
     public static GameObject SelectedTowerPrefab;
 
+    void Start()
+    {
+        SelectedTowerPrefab = null;
+    }
+
     public void SelectTower(GameObject towerPrefab)
     {
         if (towerPrefab == SelectedTowerPrefab)

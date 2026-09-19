@@ -106,16 +106,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc210dc5a50a934888afdc2a08d6e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
+  damage: 3
   range: 5
   fireRate: 1.5
   projectilePrefab: {fileID: 5696576153873047732, guid: 50560a0159f684547a732c874e47cc05, type: 3}
   firePoint: {fileID: 2869353066347268322}
   upgradeStages:
-  - range: 7
+  - damage: 4
+    range: 7
     fireRate: 2
     sprite: {fileID: 21300000, guid: 847b95d1d89897d43b748c2e92b48efd, type: 3}
     price: 20
-  - range: 10
+  - damage: 6
+    range: 10
     fireRate: 5
     sprite: {fileID: 21300000, guid: f6165d8f043547b4f89e7568f50dd048, type: 3}
     price: 30

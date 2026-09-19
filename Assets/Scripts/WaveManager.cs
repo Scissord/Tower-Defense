@@ -2,22 +2,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using System;
+
+[System.Serializable]
+public class SpawnGroup
+{
+    public GameObject enemyPrefab;
+    public int count = 5;
+
+    [Min(0.05f)]
+    public float interval = 0.8f;
+    public float delayBefore = 0f;
+}
 
 [System.Serializable]
 public class WaveData
 {
-    public float duration = 10f;
-    public int easyEnemies = 5;
-    public int hardEnemies = 2;
+    public SpawnGroup[] groups;
 }
 
 public class WaveManager : MonoBehaviour
 {
     public WaveData[] waves;
     public Button startWaveButton;
-
-    public GameObject eastEnemyPrefab;
-    public GameObject hardEnemyPrefab;
 
     public Transform[] wayPoints;
 
@@ -30,6 +37,56 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         startWaveButton.onClick.AddListener(StartWave);
+        UpdateWaveText();
+    }
+
+    private IEnumerator RunWave()
+    {
+        int runningGroups = 0;
+
+        waveRunning = true;
+        startWaveButton.interactable = false;
+
+        WaveData wave = waves[currentWaveIndex];
+
+        foreach (SpawnGroup group in wave.groups)
+        {
+            runningGroups++;
+            StartCoroutine(RunGroup(group, () => runningGroups--));
+        }
+
+        yield return new WaitUntil(() => runningGroups == 0);
+        yield return new WaitUntil(() => Enemy.Alive.Count == 0);
+
+        waveRunning = false;
+        currentWaveIndex++;
+
+        if (currentWaveIndex < waves.Length)
+        {
+            startWaveButton.interactable = true;
+            UpdateWaveText();
+        }
+
+        if (currentWaveIndex >= waves.Length)
+        {
+            Debug.Log("ПОБЕДА");
+        }
+    }
+
+    private IEnumerator RunGroup(SpawnGroup group, Action completeGroup)
+    {
+        if (group.delayBefore > 0f)
+            yield return new WaitForSeconds(group.delayBefore);
+
+        for (int i = 0; i < group.count; i++)
+        {
+            SpawnEnemy(group.enemyPrefab);
+
+            if (i < group.count - 1)
+                yield return new WaitForSeconds(group.interval);
+        }
+
+        completeGroup();
     }
 
     public void StartWave()
@@ -38,39 +95,15 @@ public class WaveManager : MonoBehaviour
         if (currentWaveIndex >= waves.Length) return;
 
         StartCoroutine(RunWave());
-
-        IEnumerator RunWave()
-        {
-            waveRunning = true;
-            startWaveButton.interactable = false;
-
-            WaveData wave = waves[currentWaveIndex];
-
-            for (int i = 0; i < wave.easyEnemies; i++)
-            {
-                SpawnEnemy(eastEnemyPrefab);
-                yield return new WaitForSeconds((wave.duration / 3) / wave.easyEnemies);
-            }
-
-            for (int i = 0; i < wave.hardEnemies; i++)
-            {
-                SpawnEnemy(hardEnemyPrefab);
-                yield return new WaitForSeconds((wave.duration / 3) / wave.hardEnemies);
-            }
-
-            yield return new WaitForSeconds(wave.duration / 3);
-
-            waveRunning = false;
-            startWaveButton.interactable = true;
-            currentWaveIndex++;
-            waveText.text = (currentWaveIndex + 1).ToString();
-        }
     }
 
     void SpawnEnemy(GameObject prefab)
     {
+        if (prefab == null) return;
         GameObject e = Instantiate(prefab, wayPoints[0].position, Quaternion.identity);
         Enemy enemy = e.GetComponent<Enemy>();
         enemy.waypoints = wayPoints;
     }
+
+    private void UpdateWaveText() => waveText.text = (currentWaveIndex + 1).ToString();
 }
